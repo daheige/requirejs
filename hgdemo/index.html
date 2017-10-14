@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>requirejs test</title>
+</head>
+<body>
+    daheige,requirejs test!
+    <!--js_src 路径由后台分配过来-->
+    <script src="js_src/requirejs/require.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //配置requirejs加载js相对路径
+        require.config({
+            baseUrl : typeof is_production != 'undefined' && is_production ? 'js/' : 'js_src/',
+            urlArgs : 'version=2.0.0',//请根据具体项目，从php后台分配过来
+        });
+        require(['config'],function(){
+            require(['test']);
+        });
+    </script>
+</body>
+</html>
