@@ -141,20 +141,25 @@
             const babel = require('gulp-babel'); //js转换
             const uglify = require('gulp-uglify'); //js压缩
             // const jshint = require('gulp-jshint'); //js检查,如果不需要检测语法错误请注释掉jshint
-            gulp.task('default', function() {
+            gulp.task('default', function () {
                 //将es6转换为es5并压缩
-                    gulp.src("es6/**/*.js")
+                gulp.src("es6/**/*.js")
                     // .pipe(jshint('.jshintrc'))
                     // .pipe(jshint.reporter('default'))
-                    .pipe(babel())
-                    .pipe(uglify({ mangle: false }))
+                    .pipe(babel({
+                        presets: ['es2015']
+                    }))
+                    .pipe(uglify({
+                        mangle: false
+                    }))
                     .pipe(gulp.dest('js_src'));
             });
 
             //监听变化
-            gulp.task("auto",function(){
-                gulp.watch('es6/**/*.js',['default']);
+            gulp.task("auto", function () {
+                gulp.watch('es6/**/*.js', ['default']);
             });
+
 
         执行打包 cd public;gulp
 ```
